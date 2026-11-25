@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MX Nuestro Cine · En vivo</title>
+<meta name="description" content="Mira la señal 22.2 de MX Nuestro Cine en vivo desde tu celular o mándala a tu televisión.">
+<meta property="og:title" content="MX Nuestro Cine · En vivo">
+<meta property="og:description" content="Cine mexicano e iberoamericano. Mira la señal 22.2 en tu celular o en tu tele.">
+<meta name="theme-color" content="#141212">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--red:#c8102e;--ink:#141212;--cream:#f6f1e8;--grey:#6e6862;--card:#fff}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0}
+body{background:var(--cream);color:var(--ink);font:17px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  border-left:22px solid var(--ink);border-right:22px solid var(--ink);min-height:100vh;position:relative}
+body::before,body::after{content:"";position:fixed;top:0;bottom:0;width:22px;pointer-events:none;
+  background:repeating-linear-gradient(to bottom,transparent 0 10px,var(--cream) 10px 22px,transparent 22px 34px);
+  -webkit-mask:linear-gradient(90deg,transparent 6px,#000 6px 16px,transparent 16px);mask:linear-gradient(90deg,transparent 6px,#000 6px 16px,transparent 16px)}
+body::before{left:-22px}body::after{right:-22px}
+main{max-width:760px;margin:0 auto;padding:22px 16px 40px}
+header{text-align:center;margin-bottom:16px}
+.mx{font-weight:900;color:var(--red);font-size:clamp(48px,14vw,84px);line-height:.9;letter-spacing:-.02em}
+.nc{font-weight:900;font-size:clamp(28px,8.4vw,50px);line-height:1;letter-spacing:-.02em}
+.sub{color:var(--grey);margin-top:8px;font-size:17px}
+.live{display:inline-flex;align-items:center;gap:7px;background:var(--red);color:#fff;font-weight:800;font-size:13px;
+  padding:3px 10px;border-radius:99px;margin-right:6px;vertical-align:2px}
+.live i{width:8px;height:8px;border-radius:50%;background:#fff;animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.live i{animation:none}}
+.player{position:relative;background:#000;border-radius:16px;overflow:hidden;aspect-ratio:16/9;box-shadow:0 10px 30px #0003}
+video{width:100%;height:100%;display:block;background:#000}
+.playover{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(#0000,#0008);border:0;cursor:pointer;color:#fff;font:inherit}
+.playover span{display:grid;place-items:center;width:84px;height:84px;border-radius:24px;background:var(--red);box-shadow:0 6px 20px #0006}
+.playover[hidden]{display:none}
+.btns{display:grid;gap:12px;margin:18px 0 8px}
+button,.btn{font:inherit;font-weight:800;font-size:19px;border:0;border-radius:14px;min-height:62px;padding:12px 18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:12px;text-decoration:none}
+.b-tv{background:var(--red);color:#fff}
+.b-play{background:var(--ink);color:#fff}
+.b-ghost{background:transparent;color:var(--ink);border:2px solid var(--ink);font-size:16px;min-height:50px}
+button:focus-visible,.btn:focus-visible,summary:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+svg.i{width:28px;height:28px;flex:none}
+#status{min-height:1.5em;text-align:center;font-weight:600;color:var(--red);margin:4px 0 12px}
+.help{background:var(--card);border-radius:16px;padding:6px 18px 14px;margin-top:18px}
+.help h2{font-size:22px;margin:14px 0 4px;line-height:1.2}
+details{border-top:1px solid #e6e0d6;padding:4px 0}
+details:first-of-type{border-top:0}
+summary{cursor:pointer;font-weight:800;font-size:18px;padding:12px 0;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::after{content:"+";color:var(--red);font-size:24px;line-height:1}
+details[open] summary::after{content:"–"}
+details ol{margin:0 0 10px;padding-left:22px}
+details li{margin:6px 0}
+.note{font-size:15px;color:var(--grey)}
+.addr{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:var(--cream);border-radius:10px;padding:10px 12px;margin:6px 0 10px}
+.addr code{font:700 15px/1.3 ui-monospace,Menlo,monospace;overflow-wrap:anywhere;flex:1 1 200px}
+.addr button{min-height:44px;font-size:15px;background:var(--ink);color:#fff;padding:8px 14px}
+.desk{display:none;margin-top:18px;background:var(--card);border-radius:16px;padding:18px;align-items:center;gap:18px}
+.desk #qr svg{width:150px;height:150px;display:block}
+@media (min-width:820px) and (hover:hover){.desk{display:flex}}
+footer{text-align:center;color:var(--grey);font-size:14px;margin-top:24px}
+footer a{color:inherit}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="mx">MX</div>
+    <div class="nc">NUESTRO CINE</div>
+    <div class="sub"><span class="live"><i></i>EN VIVO</span>Señal 22.2 · Cine mexicano e iberoamericano</div>
+  </header>
+
+  <div class="player">
+    <video id="v" playsinline controls x-webkit-airplay="allow" preload="none" aria-label="Señal en vivo de MX Nuestro Cine"></video>
+    <button class="playover" id="over" aria-label="Ver la señal en vivo">
+      <span><svg width="40" height="40" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+    </button>
+  </div>
+
+  <div class="btns">
+    <button class="b-tv" id="tv">
+      <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      Mandar a mi tele
+    </button>
+    <button class="b-play" id="play">
+      <svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      Ver aquí en el celular
+    </button>
+  </div>
+  <div id="status" role="status" aria-live="polite"></div>
+
+  <section class="help" id="ayuda">
+    <h2>¿Cómo lo veo en mi tele?</h2>
+    <p class="note">Elige lo que se parezca a tu caso. El celular y la tele deben estar conectados al mismo wifi.</p>
+
+    <details>
+      <summary>Tengo Chromecast, Google TV o Android TV</summary>
+      <ol>
+        <li>Abre esta página en <b>Google Chrome</b> desde tu celular Android.</li>
+        <li>Toca <b>Mandar a mi tele</b> y elige tu tele en la lista.</li>
+        <li>Listo: la señal se ve en la tele y puedes seguir usando el celular.</li>
+      </ol>
+    </details>
+    <details>
+      <summary>Tengo iPhone y Apple TV (o una tele con AirPlay)</summary>
+      <ol>
+        <li>Abre esta página en <b>Safari</b>.</li>
+        <li>Toca <b>Mandar a mi tele</b> y elige tu tele. Muchas teles Samsung, LG, Sony y Vizio recientes ya traen AirPlay.</li>
+        <li>Si no aparece, toca <b>Ver aquí</b> y luego el ícono de AirPlay (un rectángulo con un triángulo) en el reproductor.</li>
+      </ol>
+    </details>
+    <details>
+      <summary>Mi tele es inteligente pero no tiene nada de eso</summary>
+      <ol>
+        <li>En la tele, abre la app de <b>Internet</b> o el <b>navegador</b>.</li>
+        <li>Escribe esta dirección:</li>
+      </ol>
+      <div class="addr"><code id="url"></code><button id="copy" type="button">Copiar</button></div>
+      <ol start="3">
+        <li>Toca el botón rojo de play y pon la imagen en pantalla completa.</li>
+      </ol>
+      <p class="note">Otra opción: usa <b>Duplicar pantalla</b> del celular (en Samsung se llama Smart View; en otras marcas, Transmitir o Screen Mirroring).</p>
+    </details>
+    <details>
+      <summary>Tengo una tele normal con antena</summary>
+      <ol>
+        <li>En la Ciudad de México y la zona metropolitana, sintoniza el canal <b>22.2</b> de la televisión abierta.</li>
+        <li>Si no aparece, haz una nueva búsqueda de canales en el menú de la tele.</li>
+      </ol>
+    </details>
+  </section>
+
+  <div class="desk">
+    <div id="qr" aria-label="Código QR de esta página"></div>
+    <div><b>¿Estás en la computadora?</b><br><span class="note">Escanea este código con tu celular para abrir la página ahí y mandarla a tu tele.</span></div>
+  </div>
+
+  <footer>
+    MX Nuestro Cine · Canal 22.2<br>
+    <a href="https://conceptoweb-studio.com/radio/video/canal222/">Abrir el reproductor original</a>
+  </footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+<script>
+{
+  const SRC = "https://5fc584f3f19c9.streamlock.net/canal222/videocanal222/playlist.m3u8";
+  const TITLE = "MX Nuestro Cine · En vivo";
+  const v = document.getElementById("v"), over = document.getElementById("over"),
+        statusEl = document.getElementById("status");
+  const say = t => { statusEl.textContent = t; };
+  const nativeHls = v.canPlayType("application/vnd.apple.mpegurl") !== "";
+  let hls = null, loaded = false, castReady = false;
+
+  function load() {
+    if (loaded) return; loaded = true;
+    if (nativeHls) { v.src = SRC; }
+    else if (window.Hls && Hls.isSupported()) {
+      hls = new Hls({ liveSyncDurationCount: 3 });
+      hls.loadSource(SRC); hls.attachMedia(v);
+      hls.on(Hls.Events.ERROR, (e, d) => {
+        if (!d.fatal) return;
+        if (d.type === Hls.ErrorTypes.NETWORK_ERROR) { say("Se cortó la señal, reintentando…"); hls.startLoad(); }
+        else if (d.type === Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError();
+        else say("No se pudo cargar la señal. Prueba el reproductor original, abajo.");
+      });
+    } else { v.src = SRC; }
+  }
+  function play() {
+    load(); over.hidden = true;
+    const p = v.play();
+    if (p && p.catch) p.catch(() => say("Toca el botón de play del reproductor."));
+    say("");
+  }
+  over.addEventListener("click", play);
+  document.getElementById("play").addEventListener("click", play);
+  v.addEventListener("play", () => { over.hidden = true; });
+
+  /* Chromecast (Chrome) */
+  window.__onGCastApiAvailable = ok => {
+    if (!ok || !window.cast || !cast.framework) return;
+    cast.framework.CastContext.getInstance().setOptions({
+      receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+      autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+    });
+    castReady = true;
+  };
+  const cs = document.createElement("script");
+  cs.src = "https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1";
+  cs.async = true; document.head.appendChild(cs);
+
+  function castNow() {
+    const ctx = cast.framework.CastContext.getInstance();
+    ctx.requestSession().then(() => {
+      const s = ctx.getCurrentSession();
+      const mi = new chrome.cast.media.MediaInfo(SRC, "application/x-mpegurl");
+      mi.streamType = chrome.cast.media.StreamType.LIVE;
+      const md = new chrome.cast.media.GenericMediaMetadata();
+      md.title = TITLE; md.subtitle = "Señal 22.2"; mi.metadata = md;
+      v.pause();
+      return s.loadMedia(new chrome.cast.media.LoadRequest(mi)).then(() =>
+        say("Listo: se está viendo en " + (s.getCastDevice().friendlyName || "tu tele") + "."));
+    }).catch(err => {
+      if (err === "cancel" || (err && err.code === "cancel")) say("");
+      else showHelp("No encontramos tu tele. Revisa que estén en el mismo wifi, o mira las opciones de abajo.");
+    });
+  }
+
+  function showHelp(msg) {
+    say(msg || "");
+    const h = document.getElementById("ayuda");
+    h.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  document.getElementById("tv").addEventListener("click", () => {
+    if (castReady) return castNow();
+    if (typeof v.webkitShowPlaybackTargetPicker === "function") {   // AirPlay (iPhone / Mac)
+      load(); v.webkitShowPlaybackTargetPicker(); say("Elige tu tele en la lista de AirPlay."); return;
+    }
+    if (v.remote && typeof v.remote.prompt === "function" && nativeHls) {
+      load(); v.remote.prompt().catch(() => showHelp("Tu celular no encontró una tele compatible. Mira las opciones de abajo."));
+      return;
+    }
+    showHelp("Desde este navegador no se puede mandar directo. Sigue los pasos de abajo según tu tele.");
+  });
+
+  /* Dirección para escribir en la tele + QR para computadora */
+  const here = location.href.split("#")[0];
+  document.getElementById("url").textContent = here.replace(/^https?:\/\//, "");
+  document.getElementById("copy").addEventListener("click", e => {
+    const b = e.currentTarget;
+    (navigator.clipboard ? navigator.clipboard.writeText(here) : Promise.reject())
+      .then(() => { b.textContent = "Copiada"; setTimeout(() => b.textContent = "Copiar", 1800); })
+      .catch(() => { b.textContent = "Cópiala a mano"; });
+  });
+  if (window.qrcode) {
+    const q = qrcode(0, "M"); q.addData(here); q.make();
+    document.getElementById("qr").innerHTML = q.createSvgTag({ cellSize: 4, margin: 2, scalable: true });
+  }
+}
+</script>
+</body>
+</html>
